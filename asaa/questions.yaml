@@ -1,0 +1,152 @@
+questions:
+  - id: AUTHN_REQUIRED
+    question: Does your app require authentication?
+    options:
+      - short: y
+        long: Yes
+      - short: n
+        long: No
+  - id: AUTHN_OIDC
+    conditions:
+      - question_id: AUTHN_REQUIRED
+        answer: y
+    question: |-
+      Does your app use an approved, trusted identity provider for
+      authentication and related services (such as password recovery),
+      integrated using OIDC?
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: AUTHN_OIDC_FLOW
+    conditions:
+      - question_id: AUTHN_OIDC
+        answer: y
+    question: |-
+      Does your app use the PKCE OIDC Code Flow, or the Authorization Code
+      Flow if your app can securely store secrets?
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: SAST
+    question: |-
+      Does the most recent version of your app have a clean scan from an
+      approved SAST tool, with no unresolved medium or higher security issues?
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: SCA
+    question: |-
+      Does the most recent version of your app have a clean scan from an
+      approved SCA tool, with no unresolved medium or higher security issues?
+      Note that the SCA scan must include OS packages for containerised
+      applications, as well as application libraries.
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: DAST
+    question: |-
+      Does the most recent version of your app have a clean scan from an
+      approved DAST tool, with no unresolved medium or higher vulnerabilities?
+    options:
+      - short: y
+        long: Yes
+        score: 10
+      - short: n
+        long: No
+        score: 0
+  - id: FUZZ
+    question: Has the app been thoroughly tested with a fuzzing tool?
+    options:
+      - short: y
+        long: Yes
+        score: 10
+      - short: n
+        long: No
+        score: 0
+  - id: CSP
+    question: |-
+      Does your app have an active CSP on each page, restricting the browser
+      to only those domains required for that page to work?
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: SRI
+    question: |-
+      Does your app use SRI to validate the integrity of all <script> and
+      <link> resources?
+    options:
+      - short: y
+        long: Yes
+        score: 100
+      - short: n
+        long: No
+        score: 0
+  - id: CSRF_TOKENS
+    question: |-
+      Does your app consistently use anti-CSRF tokens to defend against CSRF
+      attacks?
+    conditions:
+      - question_id: AUTHN_REQUIRED
+        answer: y
+    options:
+      - short: y
+        long: Yes
+        score: 20
+      - short: n
+        long: No
+        score: 0
+  - id: CSRF_SAME_SITE
+    question: |-
+      Does your app consistently use anti-CSRF tokens to defend against CSRF
+      attacks?
+    conditions:
+      - question_id: AUTHN_REQUIRED
+        answer: y
+    options:
+      - short: a
+        long: Yes - all cookies are set with SameSite=Strict
+        score: 50
+      - short: b
+        long: Yes - all cookies are set with SameSite=Lax or higher
+        score: 30
+      - short: c
+        long: Kind of - all cookies use the default setting or higher
+        score: 20
+      - short: d
+        long: No - some cookies use SameSite=None
+        score: 0
+  - id: CSRF_USER_INTENT
+    question: |-
+      Does your app take any steps to verify user intent, such as CAPTCHA,
+      re-authentication, or confirmation of action, to defend against CSRF on
+      high-value operations?
+    conditions:
+      - question_id: AUTHN_REQUIRED
+        answer: y
+    options:
+      - short: y
+        long: Yes
+        score: 20
+      - short: n
+        long: No
+        score: 0

@@ -1,0 +1,14 @@
+[project]
+name = "asaa"
+version = "0.1.0"
+description = "The Application Security Assessment Assistant"
+dependencies = [
+    "click", "openai", "pyyaml"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+asaa = "asaa.cli:cli"
