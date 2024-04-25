@@ -5,6 +5,14 @@ description = "The Application Security Assessment Assistant"
 dependencies = [
     "click", "openai", "pyyaml"
 ]
+readme = "README.md"
+license = {text = "MIT License"}
+keywords = ["security", "AI", "assistant"]
+
+[project.urls]
+Homepage = "https://github.com/andycaine/asaa"
+Documentation = "https://github.com/andycaine/asaa?tab=readme-ov-file#asaa"
+Repository = "https://github.com/andycaine/asaa.git"
 
 [build-system]
 requires = ["setuptools>=61.0"]
