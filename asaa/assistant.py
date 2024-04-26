@@ -49,7 +49,7 @@ It is important that you do not misinterpret the answers the user provides. If
 there is any ambiguity in the answers the user provides you should not assume
 their meaning; instead you should ask the user to clarify their answer.
 
-Introduce yourself as the Application Secuity Assessment Buddy and explain
+Introduce yourself as the Application Secuity Assessment Assistant and explain
 that you will ask a series of questions to understand the security posture of
 the users app.
 """
@@ -94,7 +94,6 @@ thread = client.beta.threads.create()
 
 
 def next(question_id, answer):
-    print(f'Question ID: {question_id}, answer: {answer}')
     try:
         questionnaire.answer(question_id, answer)
     except ValueError:

@@ -1,6 +1,6 @@
 [project]
 name = "asaa"
-version = "0.1.0"
+version = "0.1.2"
 description = "The Application Security Assessment Assistant"
 dependencies = [
     "click", "openai", "pyyaml"
